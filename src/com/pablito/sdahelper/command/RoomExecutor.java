@@ -1,13 +1,13 @@
 package com.pablito.sdahelper.command;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class RoomExecutor {
     private final List<SmartHomeCommand> commands;
 
     public RoomExecutor() {
-        commands = new ArrayList<>();
+        commands = new LinkedList<>();
     }
 
     public void executeOperation(SmartHomeCommand command) {

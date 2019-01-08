@@ -1,11 +1,17 @@
 package com.pablito.sdahelper;
 
 import com.pablito.sdahelper.builder.Car;
+import com.pablito.sdahelper.chainofresp.Dispenser;
+import com.pablito.sdahelper.chainofresp.Dollar10Dispenser;
+import com.pablito.sdahelper.chainofresp.Dollar1Dispenser;
+import com.pablito.sdahelper.chainofresp.Dollar20Dispenser;
+import com.pablito.sdahelper.chainofresp.Dollar50Dispenser;
 import com.pablito.sdahelper.command.LightOnCommand;
 import com.pablito.sdahelper.command.LightsOffCommand;
 import com.pablito.sdahelper.command.PlayTrackCommand;
 import com.pablito.sdahelper.command.RoomExecutor;
 import com.pablito.sdahelper.command.SmartHomeRoom;
+import com.pablito.sdahelper.facade.AttendeeRepository;
 import com.pablito.sdahelper.facade.CourseFacade;
 import com.pablito.sdahelper.factory.Shape;
 import com.pablito.sdahelper.factory.ShapeFactory;
@@ -15,6 +21,7 @@ import com.pablito.sdahelper.strategy.TaxationStrategy;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.LinkedList;
 
 public class Main {
 
@@ -37,12 +44,13 @@ public class Main {
                 .build();
 
         //facade
-        final CourseFacade facade = new CourseFacade();
-        facade.addAttendee("Paweł");
-        facade.addAttendee("Andrzej");
-        facade.addAttendee("Maciej");
-        facade.addAttendee("Piotr");
-        facade.addAttendee("Kasia");
+        final AttendeeRepository repository = new AttendeeRepository(new LinkedList<>());
+        final CourseFacade facade = new CourseFacade(repository);
+        repository.addAttendee("Paweł");
+        repository.addAttendee("Andrzej");
+        repository.addAttendee("Maciej");
+        repository.addAttendee("Piotr");
+        repository.addAttendee("Kasia");
 
         System.out.println("by name: " + facade.getAttendeesSortByName());
         System.out.println("by order: " + facade.getAttendeesSortByOrder());
@@ -71,5 +79,13 @@ public class Main {
 
         System.out.println(String.format("Linear tax for 100000 is: %s", linear.calculateTax(income).doubleValue()));
         System.out.println(String.format("Progressive tax for 100000 is: %s", progressive.calculateTax(income).doubleValue()));
+
+        //chain of responsibility
+        final Dispenser dispenser =
+                new Dollar50Dispenser(new Dollar20Dispenser(new Dollar10Dispenser(new Dollar1Dispenser(null))));
+
+        System.out.println("127 dollars dipense:" + dispenser.withdraw(127));
+        System.out.println("0 dollars dipense:" + dispenser.withdraw(0));
+        System.out.println("300 dollars dipense:" + dispenser.withdraw(300));
     }
 }
