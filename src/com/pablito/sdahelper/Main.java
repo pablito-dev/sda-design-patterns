@@ -15,14 +15,11 @@ import com.pablito.sdahelper.facade.AttendeeRepository;
 import com.pablito.sdahelper.facade.CourseFacade;
 import com.pablito.sdahelper.factory.Shape;
 import com.pablito.sdahelper.factory.ShapeFactory;
-import com.pablito.sdahelper.observerSolution.Attendee;
-import com.pablito.sdahelper.observerSolution.Course;
-import com.pablito.sdahelper.observerSolution.EmailGatewayMockup;
-import com.pablito.sdahelper.observerSolution.SmsGatewayMockup;
 import com.pablito.sdahelper.strategy.LinearTaxTaxationStrategy;
 import com.pablito.sdahelper.strategy.ProgressiveTaxTaxationStrategy;
 import com.pablito.sdahelper.strategy.TaxationStrategy;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.LinkedList;
@@ -96,5 +93,10 @@ public class Main {
         //build Course here, build both Gateways here
         //add Gateways as observers of the course
         //add few attendees and check the log file
+        //REMEMBER TO USE YOUR OWN CLASSES
+
+        //decorator
+        //just uncomment this and import. REMEMBER TO USE YOUR OWN CLASSES
+        //System.out.println(new UpperCasedText(new PrintableText(new TextInFile(new File("test.txt")))).read());
     }
 }
