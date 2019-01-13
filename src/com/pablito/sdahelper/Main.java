@@ -15,6 +15,10 @@ import com.pablito.sdahelper.facade.AttendeeRepository;
 import com.pablito.sdahelper.facade.CourseFacade;
 import com.pablito.sdahelper.factory.Shape;
 import com.pablito.sdahelper.factory.ShapeFactory;
+import com.pablito.sdahelper.observerSolution.Attendee;
+import com.pablito.sdahelper.observerSolution.Course;
+import com.pablito.sdahelper.observerSolution.EmailGatewayMockup;
+import com.pablito.sdahelper.observerSolution.SmsGatewayMockup;
 import com.pablito.sdahelper.strategy.LinearTaxTaxationStrategy;
 import com.pablito.sdahelper.strategy.ProgressiveTaxTaxationStrategy;
 import com.pablito.sdahelper.strategy.TaxationStrategy;
@@ -87,5 +91,10 @@ public class Main {
         System.out.println("127 dollars dipense:" + dispenser.withdraw(127));
         System.out.println("0 dollars dipense:" + dispenser.withdraw(0));
         System.out.println("300 dollars dipense:" + dispenser.withdraw(300));
+
+        //observer
+        //build Course here, build both Gateways here
+        //add Gateways as observers of the course
+        //add few attendees and check the log file
     }
 }
